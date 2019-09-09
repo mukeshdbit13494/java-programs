@@ -5,17 +5,46 @@
  */
 package javaprograms;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+
 /**
  *
  * @author user
  */
-public class JavaPrograms {
+public class FirstNonRepeatString {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    static char checkNonRepeatChar(String s){
+        List<Character> repeat=new ArrayList<>();
+        List<Character> nonrepeat=new ArrayList<>();
+        for(int i=0;i<s.length();i++)
+        {
+            char letter=s.charAt(i);
+            if(repeat.contains(letter))
+            {
+                continue;
+            }
+             if(nonrepeat.contains(letter))
+            {
+                nonrepeat.remove((Character)letter);
+                repeat.add(letter);
+            }
+            else
+                nonrepeat.add(letter);
+        }
+        return nonrepeat.get(0);
+    }
+    public static void main(String[] args) throws IOException{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int t=Integer.parseInt(br.readLine());
+        while(t-- >0)
+        {
+            String s=br.readLine();
+            System.out.println(checkNonRepeatChar(s));
+        }
     }
     
 }
